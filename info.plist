@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.aubreypwd.alfred-workflow-fake-email</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>7CB2F737-D3E7-4E4D-9A97-13A667613C81</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5A38A850-4033-4974-A5F2-0262DED8FC80</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E2F2A94F-361B-43B2-A781-2DC8A87A88BA</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>7CB2F737-D3E7-4E4D-9A97-13A667613C81</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Aubrey Portwood</string>
+	<key>description</key>
+	<string>Makes up an @example.com email and copies that email to the clipboard.</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Fake Email</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<true/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>5A38A850-4033-4974-A5F2-0262DED8FC80</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>keyword</key>
+				<string>fake-email</string>
+				<key>subtext</key>
+				<string>Add a argument to use that as the domain, if none it will use @example.com.</string>
+				<key>text</key>
+				<string>Makeup a fake @example.com email.</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E2F2A94F-361B-43B2-A781-2DC8A87A88BA</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>100</integer>
+				<key>script</key>
+				<string>&lt;?php
+
+// Generate a random string.
+function generate_random_string( $length = 10 ) {
+    $characters = '_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters_length = strlen( $characters );
+    $random_string = '';
+    
+	for ( $i = 0; $i &lt; $length; $i++ ) {
+        $random_string .= $characters[ rand( 0, $characters_length - 1 ) ];
+    }
+
+    return $random_string;
+}
+
+
+// If the user supplies a domain, use that, otherwise use example.com
+$domain = isset( $argv[1] ) &amp;&amp; $argv[1] ? $argv[1] : 'example.com';
+
+// username@
+$username = generate_random_string( $length = 10 );
+
+// Buffer the email.
+echo "{$username}@{$domain}";
+
+?&gt;</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>1</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>7CB2F737-D3E7-4E4D-9A97-13A667613C81</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>5A38A850-4033-4974-A5F2-0262DED8FC80</key>
+		<dict>
+			<key>xpos</key>
+			<integer>690</integer>
+			<key>ypos</key>
+			<integer>200</integer>
+		</dict>
+		<key>7CB2F737-D3E7-4E4D-9A97-13A667613C81</key>
+		<dict>
+			<key>xpos</key>
+			<integer>430</integer>
+			<key>ypos</key>
+			<integer>200</integer>
+		</dict>
+		<key>E2F2A94F-361B-43B2-A781-2DC8A87A88BA</key>
+		<dict>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>200</integer>
+		</dict>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string>https://github.com/aubreypwd/alfred-workflow-fake-email</string>
+</dict>
+</plist>
